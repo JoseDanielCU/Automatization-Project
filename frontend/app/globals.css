@@ -1,0 +1,155 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+/* ─────────────────────────────────────────────────────────────────────────────
+   DESIGN TOKENS  —  paleta blanca con acento rojo
+   ───────────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg:          #ffffff;
+  --bg-card:     #ffffff;
+  --bg-hover:    #f8fafc;
+  --bg-input:    #f8fafc;
+  --bg-secondary:#f1f5f9;
+
+  /* Borders */
+  --border:       #e2e8f0;
+  --border-strong:#cbd5e1;
+
+  /* Text */
+  --text:   #0f172a;
+  --text-2: #475569;
+  --text-3: #94a3b8;
+
+  /* ── Brand RED ── */
+  --red:       #e11d48;
+  --red-dark:  #be123c;
+  --red-light: #fff1f2;
+  --red-dim:   rgba(225, 29, 72, 0.08);
+
+  /* ── Accent = Red ── */
+  --accent:     #e11d48;
+  --accent-dim: rgba(225, 29, 72, 0.08);
+
+  /* ── Semantic colors ── */
+  --green:     #10b981;
+  --green-dim: rgba(16, 185, 129, 0.10);
+
+  --yellow:     #f59e0b;
+  --yellow-dim: rgba(245, 158, 11, 0.10);
+
+  --purple:     #8b5cf6;
+  --purple-dim: rgba(139, 92, 246, 0.10);
+
+  --orange:     #f97316;
+  --orange-dim: rgba(249, 115, 22, 0.10);
+
+  --info:     #3b82f6;
+  --info-dim: rgba(59, 130, 246, 0.10);
+
+  /* ── Shadows ── */
+  --shadow-sm:  0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  --shadow-md:  0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg:  0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+
+  /* ── Typography ── */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Menlo', monospace;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   BASE
+   ───────────────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   UTILITIES
+   ───────────────────────────────────────────────────────────────────────────── */
+.mono { font-family: var(--font-mono); }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SCROLLBAR
+   ───────────────────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar              { width: 5px; height: 5px; }
+::-webkit-scrollbar-track        { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb        { background: var(--border-strong); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover  { background: var(--text-3); }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   ANIMATIONS
+   ───────────────────────────────────────────────────────────────────────────── */
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-slide-in  { animation: slide-in 0.25s ease forwards; }
+.pulse-dot         { animation: pulse-dot 2s ease-in-out infinite; }
+.animate-spin-slow { animation: spin 1.2s linear infinite; display: inline-block; }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   DATE INPUT — fuerza colores en el picker nativo
+   ───────────────────────────────────────────────────────────────────────────── */
+input[type="date"] {
+  color-scheme: light;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.5;
+  cursor: pointer;
+  filter: none;
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CHECKBOX
+   ───────────────────────────────────────────────────────────────────────────── */
+input[type="checkbox"] {
+  accent-color: var(--red);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   TAILWIND v4 — registra las variables como custom properties usables
+   con sintaxis bg-(--red), text-(--green), etc.
+   ───────────────────────────────────────────────────────────────────────────── */
+@theme inline {
+  --color-red:         var(--red);
+  --color-red-dark:    var(--red-dark);
+  --color-red-light:   var(--red-light);
+  --color-green:       var(--green);
+  --color-yellow:      var(--yellow);
+  --color-purple:      var(--purple);
+  --color-orange:      var(--orange);
+  --color-accent:      var(--accent);
+  --color-border:      var(--border);
+  --color-text:        var(--text);
+  --color-text-2:      var(--text-2);
+  --color-text-3:      var(--text-3);
+  --color-bg:          var(--bg);
+  --color-bg-card:     var(--bg-card);
+  --color-bg-hover:    var(--bg-hover);
+  --color-bg-input:    var(--bg-input);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
